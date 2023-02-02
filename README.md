@@ -18,7 +18,7 @@ Example restore script:
 docker-compose up -d postgres
 docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < backup/sqldump.pgdump
 
-#Restore media files
+# Restore media files
 docker-compose up -d
 docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < backup/media.tar.gz
 ```
