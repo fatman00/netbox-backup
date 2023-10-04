@@ -48,7 +48,7 @@ docker-compose pull
 cd ..
 
 # Download backup from github
-git clone 
+git clone https://github.com/fatman00/netbox-backup.git
 
 # Restore SQL data
 docker-compose up -d postgres
