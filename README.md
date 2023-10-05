@@ -49,11 +49,11 @@ docker-compose pull
 
 # Restore SQL data
 docker-compose up -d postgres
-docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < backup/sqldump.pgdump
+docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < ../netbox-backup/3.3.10/2023-01-26_13.13.04.pgdump
 
 #Restore media files
 docker-compose up -d
-docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < backup/media.tar.gz
+docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < ../netbox-backup/3.3.10/2023-01-26_13.13.04_media.tgz
 
 #Create new super user
 docker-compose exec netbox python manage.py createsuperuser 
