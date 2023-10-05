@@ -32,6 +32,9 @@ sudo apt upgrade -y
 # Install latest version of docker-compose
 pip3 install --upgrade --force-reinstall --no-cache-dir docker-compose && ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+# Download backup from github
+git clone https://github.com/fatman00/netbox-backup.git
+
 # Download netbox docker repo
 git clone -b release https://github.com/netbox-community/netbox-docker.git
 cd netbox-docker
@@ -43,12 +46,6 @@ export VERSION=v3.3.10
 
 # Pull docker containers
 docker-compose pull
-
-#Jump one up
-cd ..
-
-# Download backup from github
-git clone https://github.com/fatman00/netbox-backup.git
 
 # Restore SQL data
 docker-compose up -d postgres
