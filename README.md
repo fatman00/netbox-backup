@@ -86,6 +86,12 @@ docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $
 docker-compose up -d
 docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < ../netbox-backup/3.3.10/2023-01-26_13.13.04_media.tgz
 
+#Upgrade version
+#When you are ready to upgrade the version to the latest, just shutdown, remove VERSION variable end up the containers again.
+docker-compose down
+unset GNUPLOT_DRIVER_DIR
+docker-compose up -d
+
 #Create new super user
 docker-compose exec netbox python manage.py createsuperuser
 
