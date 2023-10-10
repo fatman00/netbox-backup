@@ -58,7 +58,7 @@ docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < ../netb
 #Upgrade version
 #When you are ready to upgrade the version to the latest, just shutdown, remove VERSION variable end up the containers again.
 docker-compose down
-unset GNUPLOT_DRIVER_DIR
+unset VERSION
 docker-compose up -d
 
 #Create new super user
@@ -66,6 +66,4 @@ docker-compose exec netbox python manage.py createsuperuser
 
 docker-compose exec netbox python manage.py migrate
 
-# unset VERSION
-unset VERSION
 ```
