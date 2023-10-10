@@ -96,4 +96,7 @@ docker-compose up -d
 docker-compose exec netbox python manage.py createsuperuser
 
 docker-compose exec netbox python manage.py migrate
+
+# unset VERSION
+unset VERSION
 ```
