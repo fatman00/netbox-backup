@@ -24,13 +24,18 @@ docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < backup/
 ```
 
 ## test it out
-Get this backup example up and runnig on killercoda.com
+Get this backup example up and runnig on killercoda.com Ubuntu Server 20.04
 ```
 sudo apt update
 sudo apt upgrade -y
 
-# Install latest version of docker-compose
-pip3 install --upgrade --force-reinstall --no-cache-dir docker-compose && ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
+# Install latest version of docker-compose-v2
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+
+# Make docker root folder
+mkdir /docker
+cd /docker
 
 # Download backup from github
 git clone https://github.com/fatman00/netbox-backup.git
@@ -45,25 +50,25 @@ mv docker-compose.override.yml.example docker-compose.override.yml
 export VERSION=v3.3.10
 
 # Pull docker containers
-docker-compose pull
+docker compose pull
 
 # Restore SQL data
-docker-compose up -d postgres
-docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < ../netbox-backup/3.3.10/2023-01-26_13.13.04.pgdump
+docker compose up -d postgres
+docker compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < ../netbox-backup/3.3.10/2023-01-26_13.13.04.pgdump
 
 #Restore media files
-docker-compose up -d
-docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < ../netbox-backup/3.3.10/2023-01-26_13.13.04_media.tgz
+docker compose up -d
+docker compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < ../netbox-backup/3.3.10/2023-01-26_13.13.04_media.tgz
 
 #Upgrade version
 #When you are ready to upgrade the version to the latest, just shutdown, remove VERSION variable end up the containers again.
-docker-compose down
+docker compose down
 unset VERSION
-docker-compose up -d
+docker compose up -d
 
 #Create new super user
-docker-compose exec netbox python manage.py createsuperuser
+docker compose exec netbox python manage.py createsuperuser
 
-docker-compose exec netbox python manage.py migrate
+docker compose exec netbox python manage.py migrate
 
 ```
