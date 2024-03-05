@@ -28,12 +28,22 @@ Get this backup example up and runnig on killercoda.com Ubuntu Server 20.04
 ```
 sudo apt update
 sudo apt upgrade -y
+```
 
 # Install latest version of docker-compose-v2
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh ./get-docker.sh
+```
+apt-get update -qq >/dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu focal stable" > /etc/apt/sources.list.d/docker.list
+apt-get update -qq >/dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
+```
 
 # Make docker root folder
+```
 mkdir /docker
 cd /docker
 
@@ -45,6 +55,7 @@ git clone -b release https://github.com/netbox-community/netbox-docker.git
 cd netbox-docker
 # Rename override example file.
 mv docker-compose.override.yml.example docker-compose.override.yml
+```
 
 # Try older version
 export VERSION=v3.3.10
