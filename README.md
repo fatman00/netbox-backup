@@ -40,8 +40,8 @@ apt-get update -qq >/dev/null
 DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
 ```
 
-# Make docker root folder
 ```
+# Make docker root folder
 mkdir /docker
 cd /docker
 
@@ -53,7 +53,6 @@ git clone -b release https://github.com/netbox-community/netbox-docker.git
 cd netbox-docker
 # Rename override example file.
 mv docker-compose.override.yml.example docker-compose.override.yml
-```
 
 # Try older version
 export VERSION=v3.3.10
