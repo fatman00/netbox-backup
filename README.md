@@ -15,19 +15,15 @@ docker-compose exec -T postgres sh -c 'pg_dump -v -Fc -c -U $POSTGRES_USER $POST
 Example restore script:
 ```
 # Restore SQL data
-```
 docker-compose up -d postgres
 docker-compose exec -T postgres sh -c 'pg_restore -v -Fc -cU $POSTGRES_USER -d $POSTGRES_DB' < backup/sqldump.pgdump
-```
+
 # Restore media files
-```
 docker-compose up -d
 docker-compose exec -T netbox tar x -zvf - -C /opt/netbox/netbox/media < backup/media.tar.gz
-```
 
 ## test it out
 Get this backup example up and runnig on killercoda.com Ubuntu Server 20.04
-```
 sudo apt update
 sudo apt upgrade -y
 ```
